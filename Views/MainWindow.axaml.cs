@@ -116,4 +116,5 @@ namespace MyPaint4000.Views
                 }
             }
         }
+    }
 }

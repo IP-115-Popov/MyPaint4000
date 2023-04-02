@@ -3,6 +3,8 @@
         xmlns:vm="using:MyPaint4000.ViewModels"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+		xmlns:models="clr-namespace:MyPaint4000.Models.MyShapes"
+		xmlns:conv="clr-namespace:MyPaint4000.Converters"
         mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
         x:Class="MyPaint4000.Views.MainWindow"
         Icon="/Assets/avalonia-logo.ico"
@@ -23,6 +25,9 @@
 			<Setter Property="VerticalAlignment" Value="Stretch"/>
 		</Style>
 	</Window.Styles>
+	<Window.Resources>
+		<conv:TextColorToBrushConverter x:Key="textColorToBrushConverter"/>
+	</Window.Resources>
 
 	<Grid RowDefinitions="0.08*,*">
 		<Grid Grid.Row="0" ColumnDefinitions="0.3*,0.3*,*">
@@ -54,13 +59,57 @@
 				<Button Command="{Binding AddMyFigure}" Grid.Column="0" Grid.Row="2" Name="buttonAdd" Content="Добавить"/>
 				<Button Command="{Binding MyClear}" Grid.Column="1" Grid.Row="2" Name="buttonClear" Content="Сброс"/>
 			</Grid>
-			<ItemsControl Items="{Binding CanvasFigureList}" Grid.Column="1">
+			
+			<ItemsControl Items="{Binding CanvasFigureList}" Grid.Column="1"
+						  HorizontalAlignment="Stretch"
+						  VerticalAlignment="Stretch">
+				
 				<ItemsControl.ItemsPanel>
 					<ItemsPanelTemplate>
-						<Canvas Name="canvas"/>
+						<Canvas Name="canvas" Background="White"/>
 					</ItemsPanelTemplate>
 				</ItemsControl.ItemsPanel>
+				<ItemsControl.DataTemplates>
+					<DataTemplate DataType="{x:Type models:MyRectangle}">
+						<Rectangle Height="{Binding Height}"
+								   Width="{Binding Width}"
+								   Fill="{Binding Fill, Converter={StaticResource textColorToBrushConverter}}">
+						</Rectangle>
+					</DataTemplate>
+					<DataTemplate DataType="{x:Type models:MyEllipse}">
+						<Rectangle Height="{Binding Height}"
+								   Width="{Binding Width}"
+								   Fill="{Binding Fill, Converter={StaticResource textColorToBrushConverter}}">
+						</Rectangle>
+					</DataTemplate>
+					<DataTemplate DataType="{x:Type models:MyLine}">
+						<Rectangle Height="{Binding Height}"
+								   Width="{Binding Width}"
+								   Fill="{Binding Fill, Converter={StaticResource textColorToBrushConverter}}">
+						</Rectangle>
+					</DataTemplate>
+					<DataTemplate DataType="{x:Type models:MyPath}">
+						<Rectangle Height="{Binding Height}"
+								   Width="{Binding Width}"
+								   Fill="{Binding Fill, Converter={StaticResource textColorToBrushConverter}}">
+						</Rectangle>
+					</DataTemplate>
+					<DataTemplate DataType="{x:Type models:MyPolygon}">
+						<Rectangle Height="{Binding Height}"
+								   Width="{Binding Width}"
+								   Fill="{Binding Fill, Converter={StaticResource textColorToBrushConverter}}">
+						</Rectangle>
+					</DataTemplate>
+					<DataTemplate DataType="{x:Type models:MyPolyline}">
+						<Rectangle Height="{Binding Height}"
+								   Width="{Binding Width}"
+								   Fill="{Binding Fill, Converter={StaticResource textColorToBrushConverter}}">
+						</Rectangle>
+					</DataTemplate>
+
+				</ItemsControl.DataTemplates>
 			</ItemsControl>
+			
 			<ItemsRepeater Items="{Binding CanvasFigureList}" Grid.Column="2" Name="listBoxShapes">
 				<ItemsRepeater.ItemTemplate>
 					<DataTemplate>

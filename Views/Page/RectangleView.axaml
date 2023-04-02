@@ -20,7 +20,7 @@
 		<ComboBox SelectedItem="{Binding SelectedColorLine}" Items="{Binding ColorList}" Grid.Row="4" Grid.Column="1" >
 			<ComboBox.ItemTemplate>
 				<DataTemplate>
-					<Rectangle Fill="{Binding MyBrush}" Width="30" Height="20"/>
+					<Rectangle Fill="{Binding}" Width="30" Height="20"/>
 				</DataTemplate>
 			</ComboBox.ItemTemplate>
 		</ComboBox>
@@ -28,7 +28,7 @@
 		<ComboBox Grid.Row="6" Grid.Column="1" SelectedItem="{Binding SelectedColorFill}" Items="{Binding ColorList}">
 			<ComboBox.ItemTemplate>
 				<DataTemplate>
-					<Rectangle Fill="{Binding MyBrush}" Width="30" Height="20"/>
+					<Rectangle Fill="{Binding}" Width="30" Height="20"/>
 				</DataTemplate>
 			</ComboBox.ItemTemplate>
 		</ComboBox>

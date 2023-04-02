@@ -1,5 +1,6 @@
 using Avalonia.Controls.Shapes;
 using Avalonia.Media;
+using DynamicData;
 using MyPaint4000.Models.MyShapes;
 using MyPaint4000.ViewModels.Page;
 using ReactiveUI;
@@ -77,51 +78,17 @@ namespace MyPaint4000.ViewModels
         {
             if (extension == "json")
             {
-                CanvasFigureList.Clear();
-                using (StreamReader file = new StreamReader(path))
-                {
-                    CanvasListSerialize lol = Newtonsoft.Json.JsonConvert.DeserializeObject<CanvasListSerialize>(file.ReadToEnd());
-                    CanvasFigureList = lol.DeSerializeCanvas();
-                }
             }
             else if (extension == "xml")
             {
-                XmlSerializer xmlSerializer = new XmlSerializer(typeof(CanvasListSerializeXml));
-                CanvasListSerializeXml test4 = new CanvasListSerializeXml();
-                using (FileStream fs = new FileStream(path, FileMode.OpenOrCreate))
-                {
-                    test4 = xmlSerializer.Deserialize(fs) as CanvasListSerializeXml;
-                }
-
-                CanvasFigureList = test4.DeSerializeCanvas();
             }
         }
         public void Save(string path, string extension)
         {
             if (extension == "json")
             {
-                CanvasListSerialize test3 = new CanvasListSerialize();
-                test3.SerializeCanvas(canvasFigureList);
-                string? jsonData = Newtonsoft.Json.JsonConvert.SerializeObject(test3);
-                if (jsonData != null)
-                {
-                    using (StreamWriter file = new StreamWriter(path, false))
-                    {
-                        file.Write(jsonData);
-                    }
-                }
             }
             else if (extension == "xml")
-            {
-                CanvasListSerializeXml test4 = new CanvasListSerializeXml();
-                test4.SerializeCanvas(canvasFigureList);
-                XmlSerializer xmlSerializer = new XmlSerializer(typeof(CanvasListSerializeXml));
-                using (FileStream fs = new FileStream(path, FileMode.OpenOrCreate))
-                {
-                    xmlSerializer.Serialize(fs, test4);
-                }
-            }
-            else if (extension == "png")
             {
             }
         }
@@ -142,22 +109,73 @@ namespace MyPaint4000.ViewModels
         }
         private void AddBrokenLine()
         {
-
+            CanvasFigureList.Add(new MyPolyline()
+            {
+                Name = brokenLineViewModel.Name,              
+                Stroke = brokenLineViewModel.SelectedColorLine.ToString(),
+                StrokeThickness = brokenLineViewModel.LineSize,
+                Points = brokenLineViewModel.MyPoints,
+            });
         }
         private void AddCompoundFigure()
         {
+            CanvasFigureList.Add(new MyPath()
+            {
+                Name = compoundFigureViewModel.Name,
+                Stroke = compoundFigureViewModel.SelectedColorLine.ToString(),
+                StrokeThickness = brokenLineViewModel.LineSize,
+                Data = compoundFigureViewModel.MyPoints,
+                Fill = compoundFigureViewModel.SelectedColorFill.ToString()
+            });
         }
         private void AddEllipse()
         {
+            CanvasFigureList.Add(new MyEllipse()
+            {
+                Name = ellipseViewModel.Name,
+                Stroke = ellipseViewModel.SelectedColorLine.ToString(),
+                StrokeThickness = ellipseViewModel.LineSize,
+                Fill = ellipseViewModel.SelectedColorFill.ToString(),
+                Height = ellipseViewModel.MyWidth,
+                Width = ellipseViewModel.MyHeight,
+                Margin = ellipseViewModel.X1Y1,
+                
+            });
         }
         private void AddPolygon()
         {
+            CanvasFigureList.Add(new MyPolygon()
+            {
+                Name = polygonViewModel.Name,
+                Stroke = polygonViewModel.SelectedColorLine.ToString(),
+                StrokeThickness = polygonViewModel.LineSize,
+                Fill = compoundFigureViewModel.SelectedColorFill.ToString(),
+                Points = compoundFigureViewModel.MyPoints              
+            });
         }
         private void AddRectangle()
         {
+            CanvasFigureList.Add(new MyRectangle()
+            {
+                Name = rectangleViewModel.Name,
+                Stroke = rectangleViewModel.SelectedColorLine.ToString(),
+                StrokeThickness = rectangleViewModel.LineSize,
+                Fill = rectangleViewModel.SelectedColorFill.ToString(),
+                Height = rectangleViewModel.MyWidth,
+                Width = rectangleViewModel.MyHeight,
+                Margin = rectangleViewModel.X1Y1           
+            });
         }
         private void AddStraightLine()
         {
+            CanvasFigureList.Add(new MyLine()
+            {
+                Name = straightLineViewModel.Name,
+                Stroke = straightLineViewModel.SelectedColorLine.ToString(),
+                StrokeThickness = straightLineViewModel.LineSize,
+                StartPoint = straightLineViewModel.X1Y1,
+                EndPoint = straightLineViewModel.X2Y2,              
+            });
         }
     }
 }

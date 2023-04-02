@@ -13,7 +13,6 @@ namespace MyPaint4000.Models.MyShapes
         public string? Width { get; set; }
         public string? Height { get; set; }
         public string? Margin { get; set; }
-        public string? MarginText { get; set; }
         public string? Fill { get; set; }
     }
 }
