@@ -29,6 +29,7 @@
 		<conv:TextColorToBrushConverter x:Key="textColorToBrushConverter"/>
 		<conv:StringToPointConverter x:Key="stringToPointConverter"/>
 		<conv:StringToDataPathConverterConverter x:Key="stringToDataPathConverterConverter"/>
+		<conv:StringToListOfPointsConverter x:Key="stringToListOfPointsConverter"/>
 	</Window.Resources>
 
 	<Grid RowDefinitions="0.08*,*">
@@ -107,12 +108,14 @@
 					<DataTemplate DataType="{x:Type models:MyPolygon}">
 						<Polygon  Fill="{Binding Fill, Converter={StaticResource textColorToBrushConverter}}"
 								  Stroke="{Binding Stroke, Converter={StaticResource textColorToBrushConverter}}"
-								  StrokeThickness ="{Binding StrokeThickness}">
+								  StrokeThickness ="{Binding StrokeThickness}"
+								  Points="{Binding Points, Converter={StaticResource stringToListOfPointsConverter}}">
 						</Polygon>
 					</DataTemplate>
 					<DataTemplate DataType="{x:Type models:MyPolyline}">
 						<Polyline Stroke="{Binding Stroke, Converter={StaticResource textColorToBrushConverter}}"
-								  StrokeThickness ="{Binding StrokeThickness}">
+								  StrokeThickness ="{Binding StrokeThickness}"
+								  Points="{Binding Points, Converter={StaticResource stringToListOfPointsConverter}}">
 						</Polyline>
 					</DataTemplate>
 
