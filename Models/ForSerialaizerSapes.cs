@@ -1,13 +1,6 @@
-﻿using Avalonia.Controls.Shapes;
-using DynamicData;
-using DynamicData.Binding;
-using MyPaint4000.Models.MyShapes;
-using System;
+﻿using MyPaint4000.Models.MyShapes;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace MyPaint4000.Models
 {

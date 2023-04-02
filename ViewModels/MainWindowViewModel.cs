@@ -1,19 +1,11 @@
-using Avalonia.Controls.Shapes;
-using Avalonia.Media;
-using DynamicData;
-using DynamicData.Binding;
 using MyPaint4000.Models;
 using MyPaint4000.Models.MyShapes;
 using MyPaint4000.ViewModels.Page;
 using ReactiveUI;
-using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.IO;
 using System.Reactive;
-using System.Text;
 using System.Xml.Serialization;
-using static Avalonia.OpenGL.GlInterface;
 
 namespace MyPaint4000.ViewModels
 {
@@ -198,7 +190,6 @@ namespace MyPaint4000.ViewModels
                 Margin = rectangleViewModel.X1Y1           
             });
         }
-        Shape f = new Line();
         private void AddStraightLine()
         {
             CanvasFigureList.Add(new MyLine()
