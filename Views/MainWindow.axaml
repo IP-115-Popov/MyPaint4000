@@ -75,15 +75,18 @@
 						<Rectangle Height="{Binding Height}"
 								   Width="{Binding Width}"
 								   Margin="{Binding Margin, Converter={StaticResource stringToPointConverter}}"
+								   Fill="{Binding Fill, Converter={StaticResource textColorToBrushConverter}}"
 								   Stroke="{Binding Stroke, Converter={StaticResource textColorToBrushConverter}}"
-								   Fill="{Binding Fill, Converter={StaticResource textColorToBrushConverter}}">						
+								   StrokeThickness ="{Binding StrokeThickness}">						
 						</Rectangle>
 					</DataTemplate>
 					<DataTemplate DataType="{x:Type models:MyEllipse}">
-						<Rectangle Height="{Binding Height}"
+						<Ellipse   Height="{Binding Height}"
 								   Width="{Binding Width}"
+								   Margin="{Binding Margin, Converter={StaticResource stringToPointConverter}}"
+								   Stroke="{Binding Stroke, Converter={StaticResource textColorToBrushConverter}}"
 								   Fill="{Binding Fill, Converter={StaticResource textColorToBrushConverter}}">
-						</Rectangle>
+						</Ellipse>
 					</DataTemplate>
 					<DataTemplate DataType="{x:Type models:MyLine}">
 						<Rectangle Height="{Binding Height}"
