@@ -90,10 +90,11 @@ namespace MyPaint4000.ViewModels
             else if (extension == "xml")
             {
                 CanvasFigureList.Clear();
-                XmlSerializer xmlSerializer = new XmlSerializer(typeof(ObservableCollection<MyShape>));
+                XmlSerializer xmlSerializer = new XmlSerializer(typeof(ForSerialaizerSapes));
                 using (FileStream fs = new FileStream(path, FileMode.OpenOrCreate))
                 {
-                    CanvasFigureList = xmlSerializer.Deserialize(fs) as ObservableCollection<MyShape>;
+                    ForSerialaizerSapes saverConvas = xmlSerializer.Deserialize(fs) as ForSerialaizerSapes;
+                    CanvasFigureList = saverConvas.DeSerializeCanvas();
                 }
             }
         }
