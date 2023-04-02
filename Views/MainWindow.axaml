@@ -28,6 +28,7 @@
 	<Window.Resources>
 		<conv:TextColorToBrushConverter x:Key="textColorToBrushConverter"/>
 		<conv:StringToPointConverter x:Key="stringToPointConverter"/>
+		<conv:StringToDataPathConverterConverter x:Key="stringToDataPathConverterConverter"/>
 	</Window.Resources>
 
 	<Grid RowDefinitions="0.08*,*">
@@ -84,33 +85,35 @@
 						<Ellipse   Height="{Binding Height}"
 								   Width="{Binding Width}"
 								   Margin="{Binding Margin, Converter={StaticResource stringToPointConverter}}"
+								   Fill="{Binding Fill, Converter={StaticResource textColorToBrushConverter}}"
 								   Stroke="{Binding Stroke, Converter={StaticResource textColorToBrushConverter}}"
-								   Fill="{Binding Fill, Converter={StaticResource textColorToBrushConverter}}">
+								   StrokeThickness ="{Binding StrokeThickness}">
 						</Ellipse>
 					</DataTemplate>
 					<DataTemplate DataType="{x:Type models:MyLine}">
-						<Rectangle Height="{Binding Height}"
-								   Width="{Binding Width}"
-								   Fill="{Binding Fill, Converter={StaticResource textColorToBrushConverter}}">
-						</Rectangle>
+						<Line Stroke="{Binding Stroke, Converter={StaticResource textColorToBrushConverter}}"
+							  StrokeThickness ="{Binding StrokeThickness}"
+							  StartPoint="{Binding StartPoint, Converter={StaticResource textColorToBrushConverter}}"
+							  EndPoint="{Binding EndPoint, Converter={StaticResource textColorToBrushConverter}}">
+						</Line>
 					</DataTemplate>
 					<DataTemplate DataType="{x:Type models:MyPath}">
-						<Rectangle Height="{Binding Height}"
-								   Width="{Binding Width}"
-								   Fill="{Binding Fill, Converter={StaticResource textColorToBrushConverter}}">
-						</Rectangle>
+						<Path Fill="{Binding Fill, Converter={StaticResource textColorToBrushConverter}}"
+							  Stroke="{Binding Stroke, Converter={StaticResource textColorToBrushConverter}}"
+						      StrokeThickness ="{Binding StrokeThickness}"
+							  Data="{Binding Data, Converter={StaticResource stringToDataPathConverterConverter}}">
+						</Path>
 					</DataTemplate>
 					<DataTemplate DataType="{x:Type models:MyPolygon}">
-						<Rectangle Height="{Binding Height}"
-								   Width="{Binding Width}"
-								   Fill="{Binding Fill, Converter={StaticResource textColorToBrushConverter}}">
-						</Rectangle>
+						<Polygon  Fill="{Binding Fill, Converter={StaticResource textColorToBrushConverter}}"
+								  Stroke="{Binding Stroke, Converter={StaticResource textColorToBrushConverter}}"
+								  StrokeThickness ="{Binding StrokeThickness}">
+						</Polygon>
 					</DataTemplate>
 					<DataTemplate DataType="{x:Type models:MyPolyline}">
-						<Rectangle Height="{Binding Height}"
-								   Width="{Binding Width}"
-								   Fill="{Binding Fill, Converter={StaticResource textColorToBrushConverter}}">
-						</Rectangle>
+						<Polyline Stroke="{Binding Stroke, Converter={StaticResource textColorToBrushConverter}}"
+								  StrokeThickness ="{Binding StrokeThickness}">
+						</Polyline>
 					</DataTemplate>
 
 				</ItemsControl.DataTemplates>
