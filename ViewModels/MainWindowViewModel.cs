@@ -149,8 +149,8 @@ namespace MyPaint4000.ViewModels
                 Name = polygonViewModel.Name,
                 Stroke = polygonViewModel.SelectedColorLine.ToString(),
                 StrokeThickness = polygonViewModel.LineSize,
-                Fill = compoundFigureViewModel.SelectedColorFill.ToString(),
-                Points = compoundFigureViewModel.MyPoints              
+                Fill = polygonViewModel.SelectedColorFill.ToString(),
+                Points = polygonViewModel.MyPoints              
             });
         }
         private void AddRectangle()
@@ -166,6 +166,7 @@ namespace MyPaint4000.ViewModels
                 Margin = rectangleViewModel.X1Y1           
             });
         }
+        Shape f = new Line();
         private void AddStraightLine()
         {
             CanvasFigureList.Add(new MyLine()

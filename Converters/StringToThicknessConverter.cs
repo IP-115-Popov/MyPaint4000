@@ -9,16 +9,16 @@ using System.Threading.Tasks;
 
 namespace MyPaint4000.Converters
 {
-    public class StringToPointConverter : IValueConverter
+    public class StringToThicknessConverter : IValueConverter
     {
         public object? Convert(object? value, Type targetType, object? parameter, CultureInfo culture)
         {
-            return Avalonia.Point.Parse((string)value);
+            return Avalonia.Thickness.Parse((string)value);
         }
 
         public object? ConvertBack(object? value, Type targetType, object? parameter, CultureInfo culture)
         {
-            return ((Point)value).ToString();
+            return ((Thickness)value).ToString();
         }
     }
 }

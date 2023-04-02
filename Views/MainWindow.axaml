@@ -30,6 +30,7 @@
 		<conv:StringToPointConverter x:Key="stringToPointConverter"/>
 		<conv:StringToDataPathConverterConverter x:Key="stringToDataPathConverterConverter"/>
 		<conv:StringToListOfPointsConverter x:Key="stringToListOfPointsConverter"/>
+		<conv:StringToThicknessConverter x:Key="stringToThicknessConverter"/>
 	</Window.Resources>
 
 	<Grid RowDefinitions="0.08*,*">
@@ -76,7 +77,7 @@
 					<DataTemplate DataType="{x:Type models:MyRectangle}">
 						<Rectangle Height="{Binding Height}"
 								   Width="{Binding Width}"
-								   Margin="{Binding Margin, Converter={StaticResource stringToPointConverter}}"
+								   Margin="{Binding Margin, Converter={StaticResource stringToThicknessConverter}}"
 								   Fill="{Binding Fill, Converter={StaticResource textColorToBrushConverter}}"
 								   Stroke="{Binding Stroke, Converter={StaticResource textColorToBrushConverter}}"
 								   StrokeThickness ="{Binding StrokeThickness}">						
@@ -85,7 +86,7 @@
 					<DataTemplate DataType="{x:Type models:MyEllipse}">
 						<Ellipse   Height="{Binding Height}"
 								   Width="{Binding Width}"
-								   Margin="{Binding Margin, Converter={StaticResource stringToPointConverter}}"
+								   Margin="{Binding Margin, Converter={StaticResource stringToThicknessConverter}}"
 								   Fill="{Binding Fill, Converter={StaticResource textColorToBrushConverter}}"
 								   Stroke="{Binding Stroke, Converter={StaticResource textColorToBrushConverter}}"
 								   StrokeThickness ="{Binding StrokeThickness}">
@@ -94,8 +95,8 @@
 					<DataTemplate DataType="{x:Type models:MyLine}">
 						<Line Stroke="{Binding Stroke, Converter={StaticResource textColorToBrushConverter}}"
 							  StrokeThickness ="{Binding StrokeThickness}"
-							  StartPoint="{Binding StartPoint, Converter={StaticResource textColorToBrushConverter}}"
-							  EndPoint="{Binding EndPoint, Converter={StaticResource textColorToBrushConverter}}">
+							  StartPoint="{Binding StartPoint, Converter={StaticResource stringToPointConverter}}"
+							  EndPoint="{Binding EndPoint, Converter={StaticResource stringToPointConverter}}">
 						</Line>
 					</DataTemplate>
 					<DataTemplate DataType="{x:Type models:MyPath}">
