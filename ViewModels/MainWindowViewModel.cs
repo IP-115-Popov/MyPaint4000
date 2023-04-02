@@ -1,6 +1,8 @@
 using Avalonia.Controls.Shapes;
 using Avalonia.Media;
 using DynamicData;
+using DynamicData.Binding;
+using MyPaint4000.Models;
 using MyPaint4000.Models.MyShapes;
 using MyPaint4000.ViewModels.Page;
 using ReactiveUI;
@@ -78,18 +80,47 @@ namespace MyPaint4000.ViewModels
         {
             if (extension == "json")
             {
+                CanvasFigureList.Clear();               
+                using (StreamReader file = new StreamReader(path))
+                {
+                    ForSerialaizerSapes saverConvas = Newtonsoft.Json.JsonConvert.DeserializeObject<ForSerialaizerSapes>(file.ReadToEnd());
+                    CanvasFigureList = saverConvas.DeSerializeCanvas();
+                }
             }
             else if (extension == "xml")
             {
+                CanvasFigureList.Clear();
+                XmlSerializer xmlSerializer = new XmlSerializer(typeof(ObservableCollection<MyShape>));
+                using (FileStream fs = new FileStream(path, FileMode.OpenOrCreate))
+                {
+                    CanvasFigureList = xmlSerializer.Deserialize(fs) as ObservableCollection<MyShape>;
+                }
             }
         }
         public void Save(string path, string extension)
         {
             if (extension == "json")
             {
+                ForSerialaizerSapes saverConvas = new ForSerialaizerSapes();
+                saverConvas.SerializeCanvas(canvasFigureList);
+                string? jsonData = Newtonsoft.Json.JsonConvert.SerializeObject(saverConvas);
+                if (jsonData != null)
+                {
+                    using (StreamWriter file = new StreamWriter(path, false))
+                    {
+                        file.Write(jsonData);
+                    }
+                }
             }
             else if (extension == "xml")
             {
+                ForSerialaizerSapes saverConvas = new ForSerialaizerSapes();
+                saverConvas.SerializeCanvas(canvasFigureList);
+                XmlSerializer xmlSerializer = new XmlSerializer(typeof(ForSerialaizerSapes));
+                using (FileStream fs = new FileStream(path, FileMode.OpenOrCreate))
+                {
+                    xmlSerializer.Serialize(fs, saverConvas);
+                }
             }
         }
         public MyFigure? MyFigure
