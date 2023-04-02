@@ -27,6 +27,7 @@
 	</Window.Styles>
 	<Window.Resources>
 		<conv:TextColorToBrushConverter x:Key="textColorToBrushConverter"/>
+		<conv:StringToPointConverter x:Key="stringToPointConverter"/>
 	</Window.Resources>
 
 	<Grid RowDefinitions="0.08*,*">
@@ -73,7 +74,9 @@
 					<DataTemplate DataType="{x:Type models:MyRectangle}">
 						<Rectangle Height="{Binding Height}"
 								   Width="{Binding Width}"
-								   Fill="{Binding Fill, Converter={StaticResource textColorToBrushConverter}}">
+								   Margin="{Binding Margin, Converter={StaticResource stringToPointConverter}}"
+								   Stroke="{Binding Stroke, Converter={StaticResource textColorToBrushConverter}}"
+								   Fill="{Binding Fill, Converter={StaticResource textColorToBrushConverter}}">						
 						</Rectangle>
 					</DataTemplate>
 					<DataTemplate DataType="{x:Type models:MyEllipse}">
