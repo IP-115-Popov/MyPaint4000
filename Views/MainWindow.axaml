@@ -1,0 +1,78 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:vm="using:MyPaint4000.ViewModels"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+        x:Class="MyPaint4000.Views.MainWindow"
+        Icon="/Assets/avalonia-logo.ico"
+        Title="MyPaint4000">
+
+    <Design.DataContext>
+        <vm:MainWindowViewModel/>
+    </Design.DataContext>
+
+	<Design.DataContext>
+		<vm:MainWindowViewModel/>
+	</Design.DataContext>
+	<Window.Styles>
+		<Style Selector="Button">
+			<Setter Property="VerticalContentAlignment" Value="Center"/>
+			<Setter Property="HorizontalContentAlignment" Value="Center"/>
+			<Setter Property="HorizontalAlignment" Value="Stretch"/>
+			<Setter Property="VerticalAlignment" Value="Stretch"/>
+		</Style>
+	</Window.Styles>
+
+	<Grid RowDefinitions="0.08*,*">
+		<Grid Grid.Row="0" ColumnDefinitions="0.3*,0.3*,*">
+			<Menu Grid.Column="0">
+				<MenuItem Header="Экспортировать" Name="menuExport">
+
+					<MenuItem Header="Экспортировать из .xml" Click="OpenFileXml"/>
+					<MenuItem Header="Экспортировать из .json" Click="OpenFileJson"/>
+				</MenuItem>
+			</Menu>
+			<Menu Grid.Column="1">
+				<MenuItem Header="Импортировать" Name="menuImport">
+					<MenuItem Header="Экспортировать в .png" Click="SaveFilePng"/>
+					<MenuItem Header="Импортировать в .xml" Click="SaveFileXml"/>
+					<MenuItem Header="Импортировать в .json" Click="SaveFileJson"/>
+				</MenuItem>
+			</Menu>
+		</Grid>
+		<Grid ShowGridLines="True"  Grid.Row="1" ColumnDefinitions="0.5*,*,0.4*">
+			<Grid Grid.Column="0" ColumnDefinitions="*,*" RowDefinitions="0.1*,*,0.1*">
+				<ComboBox SelectedItem="{Binding MyFigure}" Items="{Binding MyFiguresList}" Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="1" Name="comboBoxShape">
+					<ComboBox.ItemTemplate>
+						<DataTemplate>
+							<TextBlock Text="{Binding Header}"/>
+						</DataTemplate>
+					</ComboBox.ItemTemplate>
+				</ComboBox>
+				<ContentControl Content="{Binding MyFigure}" Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="2"/>
+				<Button Command="{Binding AddMyFigure}" Grid.Column="0" Grid.Row="2" Name="buttonAdd" Content="Добавить"/>
+				<Button Command="{Binding MyClear}" Grid.Column="1" Grid.Row="2" Name="buttonClear" Content="Сброс"/>
+			</Grid>
+			<ItemsControl Items="{Binding CanvasFigureList}" Grid.Column="1">
+				<ItemsControl.ItemsPanel>
+					<ItemsPanelTemplate>
+						<Canvas Name="canvas"/>
+					</ItemsPanelTemplate>
+				</ItemsControl.ItemsPanel>
+			</ItemsControl>
+			<ItemsRepeater Items="{Binding CanvasFigureList}" Grid.Column="2" Name="listBoxShapes">
+				<ItemsRepeater.ItemTemplate>
+					<DataTemplate>
+						<Grid ColumnDefinitions="*,*">
+							<TextBlock Grid.Column="0" Text="{Binding Name}"/>
+							<Button Grid.Column="1" Content="Del" Command="{Binding $parent[Window].DataContext.DelItem}"
+									CommandParameter="{Binding}"/>
+						</Grid>
+					</DataTemplate>
+				</ItemsRepeater.ItemTemplate>
+			</ItemsRepeater>
+		</Grid>
+	</Grid>
+
+</Window>

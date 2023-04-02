@@ -1,0 +1,32 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             x:Class="MyPaint4000.Views.Page.PolygonView">
+	<Grid RowDefinitions="*,*,*,*,*" ColumnDefinitions="*,*">
+		<TextBlock Grid.Row="0" Grid.Column="0" Text="Имя:"/>
+		<TextBlock Grid.Row="1" Grid.Column="0" Text="Точки:"/>
+		<TextBlock Grid.Row="2" Grid.Column="0" Text="Цвет линии:"/>
+		<TextBlock Grid.Row="3" Grid.Column="0" Text="Толщина линии:"/>
+		<TextBlock Grid.Row="4" Grid.Column="0" Text="Цвет заливки:"/>
+
+		<TextBox Grid.Row="0" Grid.Column="1" Text="{Binding Name}"/>
+		<TextBox Grid.Row="1" Grid.Column="1" Text="{Binding MyPoints}"/>
+		<ComboBox SelectedItem="{Binding SelectedColorLine}" Items="{Binding ColorList}" Grid.Row="2" Grid.Column="1" >
+			<ComboBox.ItemTemplate>
+				<DataTemplate>
+					<Rectangle Fill="{Binding MyBrush}" Width="30" Height="20"/>
+				</DataTemplate>
+			</ComboBox.ItemTemplate>
+		</ComboBox>
+		<NumericUpDown Grid.Row="3" Grid.Column="1" Minimum="1" Value="{Binding LineSize}" Name="numericUpDownStroke"/>
+		<ComboBox Grid.Row="4" Grid.Column="1" SelectedItem="{Binding SelectedColorFill}" Items="{Binding ColorList}">
+			<ComboBox.ItemTemplate>
+				<DataTemplate>
+					<Rectangle Fill="{Binding MyBrush}" Width="30" Height="20"/>
+				</DataTemplate>
+			</ComboBox.ItemTemplate>
+		</ComboBox>
+	</Grid>
+</UserControl>
