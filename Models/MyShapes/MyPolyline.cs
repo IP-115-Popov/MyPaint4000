@@ -9,5 +9,6 @@ namespace MyPaint4000.Models.MyShapes
     public class MyPolyline : MyShape
     {
         public MyPolyline() { }
+        public string? Points { get; set; }
     }
 }
