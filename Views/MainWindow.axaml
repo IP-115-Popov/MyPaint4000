@@ -80,7 +80,20 @@
 								   Margin="{Binding Margin, Converter={StaticResource stringToThicknessConverter}}"
 								   Fill="{Binding Fill, Converter={StaticResource textColorToBrushConverter}}"
 								   Stroke="{Binding Stroke, Converter={StaticResource textColorToBrushConverter}}"
-								   StrokeThickness ="{Binding StrokeThickness}">						
+								   StrokeThickness ="{Binding StrokeThickness}">
+							<Rectangle.RenderTransform>
+								<TransformGroup>
+									<TranslateTransform X="{Binding TranslateTransformX}"
+														Y="{Binding TranslateTransformY}"/>
+									<RotateTransform Angle="{Binding RotateTransformAngleDeg}"
+													 CenterX="{Binding RotateTransformCenterX}"
+													 CenterY="{Binding RotateTransformCenterY}"/>								
+									<ScaleTransform ScaleX="{Binding ScaleTransformX}"
+													ScaleY="{Binding ScaleTransformY}"/>
+									<SkewTransform AngleX="{Binding SkewTransformAngleX}"
+												   AngleY="{Binding SkewTransformAngleY}"/>
+								</TransformGroup>
+							</Rectangle.RenderTransform>
 						</Rectangle>
 					</DataTemplate>
 					<DataTemplate DataType="{x:Type models:MyEllipse}">
@@ -90,6 +103,19 @@
 								   Fill="{Binding Fill, Converter={StaticResource textColorToBrushConverter}}"
 								   Stroke="{Binding Stroke, Converter={StaticResource textColorToBrushConverter}}"
 								   StrokeThickness ="{Binding StrokeThickness}">
+							<Ellipse.RenderTransform>
+								<TransformGroup>
+									<TranslateTransform X="{Binding TranslateTransformX}"
+														Y="{Binding TranslateTransformY}"/>
+									<RotateTransform Angle="{Binding RotateTransformAngleDeg}"
+													 CenterX="{Binding RotateTransformCenterX}"
+													 CenterY="{Binding RotateTransformCenterY}"/>
+									<ScaleTransform ScaleX="{Binding ScaleTransformX}"
+													ScaleY="{Binding ScaleTransformY}"/>
+									<SkewTransform AngleX="{Binding SkewTransformAngleX}"
+												   AngleY="{Binding SkewTransformAngleY}"/>
+								</TransformGroup>
+							</Ellipse.RenderTransform>
 						</Ellipse>
 					</DataTemplate>
 					<DataTemplate DataType="{x:Type models:MyLine}">
@@ -97,6 +123,19 @@
 							  StrokeThickness ="{Binding StrokeThickness}"
 							  StartPoint="{Binding StartPoint, Converter={StaticResource stringToPointConverter}}"
 							  EndPoint="{Binding EndPoint, Converter={StaticResource stringToPointConverter}}">
+							<Line.RenderTransform>
+								<TransformGroup>
+									<TranslateTransform X="{Binding TranslateTransformX}"
+														Y="{Binding TranslateTransformY}"/>
+									<RotateTransform Angle="{Binding RotateTransformAngleDeg}"
+													 CenterX="{Binding RotateTransformCenterX}"
+													 CenterY="{Binding RotateTransformCenterY}"/>
+									<ScaleTransform ScaleX="{Binding ScaleTransformX}"
+													ScaleY="{Binding ScaleTransformY}"/>
+									<SkewTransform AngleX="{Binding SkewTransformAngleX}"
+												   AngleY="{Binding SkewTransformAngleY}"/>
+								</TransformGroup>
+							</Line.RenderTransform>
 						</Line>
 					</DataTemplate>
 					<DataTemplate DataType="{x:Type models:MyPath}">
@@ -104,6 +143,19 @@
 							  Stroke="{Binding Stroke, Converter={StaticResource textColorToBrushConverter}}"
 						      StrokeThickness ="{Binding StrokeThickness}"
 							  Data="{Binding Data, Converter={StaticResource stringToDataPathConverterConverter}}">
+							<Path.RenderTransform>
+								<TransformGroup>
+									<TranslateTransform X="{Binding TranslateTransformX}"
+														Y="{Binding TranslateTransformY}"/>
+									<RotateTransform Angle="{Binding RotateTransformAngleDeg}"
+													 CenterX="{Binding RotateTransformCenterX}"
+													 CenterY="{Binding RotateTransformCenterY}"/>
+									<ScaleTransform ScaleX="{Binding ScaleTransformX}"
+													ScaleY="{Binding ScaleTransformY}"/>
+									<SkewTransform AngleX="{Binding SkewTransformAngleX}"
+												   AngleY="{Binding SkewTransformAngleY}"/>
+								</TransformGroup>
+							</Path.RenderTransform>
 						</Path>
 					</DataTemplate>
 					<DataTemplate DataType="{x:Type models:MyPolygon}">
@@ -111,20 +163,46 @@
 								  Stroke="{Binding Stroke, Converter={StaticResource textColorToBrushConverter}}"
 								  StrokeThickness ="{Binding StrokeThickness}"
 								  Points="{Binding Points, Converter={StaticResource stringToListOfPointsConverter}}">
+							<Polygon.RenderTransform>
+								<TransformGroup>
+									<TranslateTransform X="{Binding TranslateTransformX}"
+														Y="{Binding TranslateTransformY}"/>
+									<RotateTransform Angle="{Binding RotateTransformAngleDeg}"
+													 CenterX="{Binding RotateTransformCenterX}"
+													 CenterY="{Binding RotateTransformCenterY}"/>
+									<ScaleTransform ScaleX="{Binding ScaleTransformX}"
+													ScaleY="{Binding ScaleTransformY}"/>
+									<SkewTransform AngleX="{Binding SkewTransformAngleX}"
+												   AngleY="{Binding SkewTransformAngleY}"/>
+								</TransformGroup>
+							</Polygon.RenderTransform>
 						</Polygon>
 					</DataTemplate>
 					<DataTemplate DataType="{x:Type models:MyPolyline}">
 						<Polyline Stroke="{Binding Stroke, Converter={StaticResource textColorToBrushConverter}}"
 								  StrokeThickness ="{Binding StrokeThickness}"
 								  Points="{Binding Points, Converter={StaticResource stringToListOfPointsConverter}}">
+							<Polyline.RenderTransform>
+								<TransformGroup>
+									<TranslateTransform X="{Binding TranslateTransformX}"
+														Y="{Binding TranslateTransformY}"/>
+									<RotateTransform Angle="{Binding RotateTransformAngleDeg}"
+													 CenterX="{Binding RotateTransformCenterX}"
+													 CenterY="{Binding RotateTransformCenterY}"/>
+									<ScaleTransform ScaleX="{Binding ScaleTransformX}"
+													ScaleY="{Binding ScaleTransformY}"/>
+									<SkewTransform AngleX="{Binding SkewTransformAngleX}"
+												   AngleY="{Binding SkewTransformAngleY}"/>
+								</TransformGroup>
+							</Polyline.RenderTransform>
 						</Polyline>
 					</DataTemplate>
 
 				</ItemsControl.DataTemplates>
 			</ItemsControl>
 			
-			<ItemsRepeater Items="{Binding CanvasFigureList}" Grid.Column="2" Name="listBoxShapes">
-				<ItemsRepeater.ItemTemplate>
+			<ListBox Items="{Binding CanvasFigureList}" Grid.Column="2" Name="listBoxShapes">
+				<ListBox.ItemTemplate>
 					<DataTemplate>
 						<Grid ColumnDefinitions="*,*">
 							<TextBlock Grid.Column="0" Text="{Binding Name}"/>
@@ -132,8 +210,8 @@
 									CommandParameter="{Binding}"/>
 						</Grid>
 					</DataTemplate>
-				</ItemsRepeater.ItemTemplate>
-			</ItemsRepeater>
+				</ListBox.ItemTemplate>
+			</ListBox>
 		</Grid>
 	</Grid>
 

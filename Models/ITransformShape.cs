@@ -23,8 +23,5 @@ namespace MyPaint4000.Models
         //угол наклона по асям
         double SkewTransformAngleX { get; set; }
         double SkewTransformAngleY { get; set; }
-        //центр
-        double SkewTransformCenterX { get; set; }
-        double SkewTransformCenterY { get; set; }
     }
 }
