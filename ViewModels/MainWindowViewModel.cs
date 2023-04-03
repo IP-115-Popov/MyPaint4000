@@ -1,16 +1,19 @@
 using MyPaint4000.Models;
 using MyPaint4000.Models.MyShapes;
 using MyPaint4000.ViewModels.Page;
+using Newtonsoft.Json.Linq;
 using ReactiveUI;
 using System.Collections.ObjectModel;
 using System.IO;
 using System.Reactive;
 using System.Xml.Serialization;
 
+
 namespace MyPaint4000.ViewModels
 {
     public class MainWindowViewModel : ViewModelBase
     {
+        private string buttonAbbText;
         //Меню настройки фигуры
         private ViewModelBase transformShapeMenu;
         //трансформируемая фигура
@@ -29,6 +32,7 @@ namespace MyPaint4000.ViewModels
         StraightLineViewModel straightLineViewModel;
         public MainWindowViewModel() 
         {
+            buttonAbbText = "Добавить";
             transformShapeMenu = new TransformShapeMenuViewModel();
             //список фигур для отображения на холсте и в списке фигур
             canvasFigureList = new ObservableCollection<MyShape>();
@@ -49,23 +53,37 @@ namespace MyPaint4000.ViewModels
             });
             AddMyFigure = ReactiveCommand.Create(() =>
             {
-                if (myFigure != MyFigure) return;
-                //удаляем элемент с такимже именем
-                string nameAddItem = ((MyFigure)myFigure).Name;
-                foreach (MyShape i in canvasFigureList)
+                if (myFigure is MyFigure)
                 {
-                    if (i.Name == nameAddItem)
+                    //удаляем элемент с такимже именем
+                    string nameAddItem = ((MyFigure)myFigure).Name;
+                    foreach (MyShape i in canvasFigureList)
                     {
-                        CanvasFigureList.Remove(i);
-                        break;
+                        if (i.Name == nameAddItem)
+                        {
+                            CanvasFigureList.Remove(i);
+                            break;
+                        }
                     }
+                    if (myFigure is BrokenLineViewModel) AddBrokenLine();
+                    else if (myFigure is CompoundFigureViewModel) AddCompoundFigure();
+                    else if (myFigure is EllipseViewModel) AddEllipse();
+                    else if (myFigure is PolygonViewModel) AddPolygon();
+                    else if (myFigure is RectangleViewModel) AddRectangle();
+                    else if (myFigure is StraightLineViewModel) AddStraightLine();
                 }
-                if (myFigure is BrokenLineViewModel) AddBrokenLine();
-                else if (myFigure is CompoundFigureViewModel) AddCompoundFigure();
-                else if (myFigure is EllipseViewModel) AddEllipse();
-                else if (myFigure is PolygonViewModel) AddPolygon();
-                else if (myFigure is RectangleViewModel) AddRectangle();
-                else if (myFigure is StraightLineViewModel) AddStraightLine();
+                else if (myFigure is TransformShapeMenuViewModel)
+                {
+                    NowTransformShape.TranslateTransformX = ((TransformShapeMenuViewModel)myFigure).TranslateTransformX;
+                    NowTransformShape.TranslateTransformY = ((TransformShapeMenuViewModel)myFigure).TranslateTransformY;
+                    NowTransformShape.RotateTransformAngleDeg = ((TransformShapeMenuViewModel)myFigure).RotateTransformAngleDeg;
+                    NowTransformShape.RotateTransformCenterX = ((TransformShapeMenuViewModel)myFigure).RotateTransformCenterX;
+                    NowTransformShape.RotateTransformCenterY = ((TransformShapeMenuViewModel)myFigure).RotateTransformCenterY;
+                    NowTransformShape.ScaleTransformX = ((TransformShapeMenuViewModel)myFigure).ScaleTransformX;
+                    NowTransformShape.ScaleTransformY = ((TransformShapeMenuViewModel)myFigure).ScaleTransformY;
+                    NowTransformShape.SkewTransformAngleX = ((TransformShapeMenuViewModel)myFigure).SkewTransformAngleX;
+                    NowTransformShape.SkewTransformAngleY = ((TransformShapeMenuViewModel)myFigure).SkewTransformAngleY;
+                }
             });
             DelItem = ReactiveCommand.Create<MyShape>((returnedMyFigure) =>
             {
@@ -123,20 +141,55 @@ namespace MyPaint4000.ViewModels
                 }
             }
         }
+        private string ButtonAbbText
+        {
+            get => buttonAbbText;
+            set
+            {
+                this.RaiseAndSetIfChanged(ref buttonAbbText, value);
+            }
+        }
         //трансформируемая фигура
         public MyShape? NowTransformShape
         {
-            get => nowTransformShape;
+            get
+            {
+                return nowTransformShape;
+            }
             set
             {
                 this.RaiseAndSetIfChanged(ref nowTransformShape, value);
+                if (value != null)
+                {
+                    ((TransformShapeMenuViewModel)transformShapeMenu).TranslateTransformX = value.TranslateTransformX;
+                    ((TransformShapeMenuViewModel)transformShapeMenu).TranslateTransformY = value.TranslateTransformY;
+                    ((TransformShapeMenuViewModel)transformShapeMenu).RotateTransformAngleDeg = value.RotateTransformAngleDeg;
+                    ((TransformShapeMenuViewModel)transformShapeMenu).RotateTransformCenterX = value.RotateTransformCenterX;
+                    ((TransformShapeMenuViewModel)transformShapeMenu).RotateTransformCenterY = value.RotateTransformCenterY;
+                    ((TransformShapeMenuViewModel)transformShapeMenu).ScaleTransformX = value.ScaleTransformX;
+                    ((TransformShapeMenuViewModel)transformShapeMenu).ScaleTransformY = value.ScaleTransformY;
+                    ((TransformShapeMenuViewModel)transformShapeMenu).SkewTransformAngleX = value.SkewTransformAngleX;
+                    ((TransformShapeMenuViewModel)transformShapeMenu).SkewTransformAngleY = value.SkewTransformAngleY;
+                }
                 MyFigure = transformShapeMenu;
+                MyFigure = transformShapeMenu;
+
             }
         }
         public ViewModelBase? MyFigure
         {
             get => myFigure;
-            set => this.RaiseAndSetIfChanged(ref myFigure, value);
+            set
+            {
+                this.RaiseAndSetIfChanged(ref myFigure, value);
+                if (MyFigure is MyFigure) 
+                {
+                    ButtonAbbText = "Добавить";
+                } else if (MyFigure is TransformShapeMenuViewModel)
+                {
+                    ButtonAbbText = "Изменить";
+                }
+            }
         }
         public ObservableCollection<MyFigure> MyFiguresList
         {

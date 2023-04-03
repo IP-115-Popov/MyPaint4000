@@ -22,6 +22,10 @@ namespace MyPaint4000.ViewModels
         private double scaleTransformY;
         private double skewTransformAngleX;
         private double skewTransformAngleY;
+        public TransformShapeMenuViewModel()
+        {
+            SetDefault();
+        }
         //своиства трансформации
         public double TranslateTransformX
         {
@@ -75,8 +79,8 @@ namespace MyPaint4000.ViewModels
             RotateTransformAngleDeg = 0;
             RotateTransformCenterX = 0;
             RotateTransformCenterY = 0;
-            ScaleTransformX = 0;
-            ScaleTransformY = 0;
+            ScaleTransformX = 1;
+            ScaleTransformY = 1;
             SkewTransformAngleX = 0;
             SkewTransformAngleY = 0;
     }

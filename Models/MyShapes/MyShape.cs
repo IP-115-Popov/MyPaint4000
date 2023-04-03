@@ -4,11 +4,21 @@ using System.Linq;
 using System.Runtime.Serialization;
 using System.Text;
 using System.Threading.Tasks;
+using DynamicData.Binding;
 
 namespace MyPaint4000.Models.MyShapes
 {
-    public class MyShape : ITransformShape
+    public class MyShape : AbstractNotifyPropertyChanged, ITransformShape
     {
+        private double translateTransformX;
+        private double translateTransformY;
+        private double rotateTransformAngleDeg;
+        private double rotateTransformCenterX;
+        private double rotateTransformCenterY;
+        private double scaleTransformX;
+        private double scaleTransformY;
+        private double skewTransformAngleX;
+        private double skewTransformAngleY;
         public MyShape() 
         {
             TranslateTransformX = 0;
@@ -25,14 +35,50 @@ namespace MyPaint4000.Models.MyShapes
         public double StrokeThickness { get; set; }
         public string? Stroke { get; set; }
         //транформация
-        public double TranslateTransformX { get; set; }
-        public double TranslateTransformY { get; set; }
-        public double RotateTransformAngleDeg { get; set; }
-        public double RotateTransformCenterX { get; set; }
-        public double RotateTransformCenterY { get; set ; }
-        public double ScaleTransformX { get; set; }
-        public double ScaleTransformY { get; set; }
-        public double SkewTransformAngleX { get; set; }
-        public double SkewTransformAngleY { get; set; }
+        public double TranslateTransformX
+        {
+            get => translateTransformX;
+            set => SetAndRaise(ref translateTransformX, value);
+        }
+        public double TranslateTransformY
+        {
+            get => translateTransformY;
+            set => SetAndRaise(ref translateTransformY, value);
+        }
+        public double RotateTransformAngleDeg
+        {
+            get => rotateTransformAngleDeg;
+            set => SetAndRaise(ref rotateTransformAngleDeg, value);
+        }
+        public double RotateTransformCenterX
+        {
+            get => rotateTransformCenterX;
+            set => SetAndRaise(ref rotateTransformCenterX, value);
+        }
+        public double RotateTransformCenterY
+        {
+            get => rotateTransformCenterY;
+            set => SetAndRaise(ref rotateTransformCenterY, value);
+        }
+        public double ScaleTransformX
+        {
+            get => scaleTransformX;
+            set => SetAndRaise(ref scaleTransformX, value);
+        }
+        public double ScaleTransformY
+        {
+            get => scaleTransformY;
+            set => SetAndRaise(ref scaleTransformY, value);
+        }
+        public double SkewTransformAngleX
+        {
+            get => skewTransformAngleX;
+            set => SetAndRaise(ref skewTransformAngleX, value);
+        }
+        public double SkewTransformAngleY
+        {
+            get => skewTransformAngleY;
+            set => SetAndRaise(ref skewTransformAngleY, value);
+        }
     }
 }

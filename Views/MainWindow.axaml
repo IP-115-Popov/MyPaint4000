@@ -60,7 +60,7 @@
 					</ComboBox.ItemTemplate>
 				</ComboBox>
 				<ContentControl Content="{Binding MyFigure}" Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="2"/>
-				<Button Command="{Binding AddMyFigure}" Grid.Column="0" Grid.Row="2" Name="buttonAdd" Content="Добавить"/>
+				<Button Command="{Binding AddMyFigure}" Grid.Column="0" Grid.Row="2" Name="buttonAdd" Content="{Binding ButtonAbbText}"/>
 				<Button Command="{Binding MyClear}" Grid.Column="1" Grid.Row="2" Name="buttonClear" Content="Сброс"/>
 			</Grid>
 			
