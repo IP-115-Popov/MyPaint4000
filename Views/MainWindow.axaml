@@ -201,7 +201,7 @@
 				</ItemsControl.DataTemplates>
 			</ItemsControl>
 			
-			<ListBox Items="{Binding CanvasFigureList}" Grid.Column="2" Name="listBoxShapes">
+			<ListBox SelectedItem="{Binding NowTransformShape}" Items="{Binding CanvasFigureList}" Grid.Column="2" Name="listBoxShapes">
 				<ListBox.ItemTemplate>
 					<DataTemplate>
 						<Grid ColumnDefinitions="*,*">

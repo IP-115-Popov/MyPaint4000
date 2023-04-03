@@ -1,0 +1,30 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             x:Class="MyPaint4000.Views.TransformShapeMenuView">
+	<Grid ColumnDefinitions="*,*" RowDefinitions="*,*,*,*,*,*,*,*,*">
+		<TextBlock Grid.Column="0" Grid.Row="0" Text="Здвинуть по X"/>
+		<TextBlock Grid.Column="0" Grid.Row="1" Text="Здвинуть по Y"/>
+		<TextBlock Grid.Column="0" Grid.Row="2" Text="Угол поворота"/>
+		<TextBlock Grid.Column="0" Grid.Row="3" Text="Центр поворота X"/>
+		<TextBlock Grid.Column="0" Grid.Row="4" Text="Центр поворота Y"/>
+		<TextBlock Grid.Column="0" Grid.Row="5" Text="Моштаб по X"/>
+		<TextBlock Grid.Column="0" Grid.Row="6" Text="Моштаб по Y"/>
+		<TextBlock Grid.Column="0" Grid.Row="7" Text="Наклон по X"/>
+		<TextBlock Grid.Column="0" Grid.Row="8" Text="Наклон по Y"/>
+
+		<TextBox Grid.Column="1" Grid.Row="0" Text="{Binding TranslateTransformX}"/>
+		<TextBox Grid.Column="1" Grid.Row="1" Text="{Binding TranslateTransformY}"/>
+		<TextBox Grid.Column="1" Grid.Row="2" Text="{Binding RotateTransformAngleDeg}"/>
+		<TextBox Grid.Column="1" Grid.Row="3" Text="{Binding RotateTransformCenterX}"/>
+		<TextBox Grid.Column="1" Grid.Row="4" Text="{Binding RotateTransformCenterY}"/>
+		<TextBox Grid.Column="1" Grid.Row="5" Text="{Binding ScaleTransformX}"/>
+		<TextBox Grid.Column="1" Grid.Row="6" Text="{Binding ScaleTransformY}"/>
+		<TextBox Grid.Column="1" Grid.Row="7" Text="{Binding SkewTransformAngleX}"/>
+		<TextBox Grid.Column="1" Grid.Row="8" Text="{Binding SkewTransformAngleY}"/>
+		
+		
+	</Grid>
+</UserControl>

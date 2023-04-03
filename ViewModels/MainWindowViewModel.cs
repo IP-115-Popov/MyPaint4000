@@ -11,9 +11,13 @@ namespace MyPaint4000.ViewModels
 {
     public class MainWindowViewModel : ViewModelBase
     {
+        //Меню настройки фигуры
+        private ViewModelBase transformShapeMenu;
+        //трансформируемая фигура
+        private MyShape? nowTransformShape;
         private ObservableCollection<MyShape> canvasFigureList;
         //настраиваемая фигура
-        private MyFigure? myFigure;
+        private ViewModelBase? myFigure;
         //список настраивыемых фигур
         private ObservableCollection<MyFigure> myFiguresList;
 
@@ -25,6 +29,7 @@ namespace MyPaint4000.ViewModels
         StraightLineViewModel straightLineViewModel;
         public MainWindowViewModel() 
         {
+            transformShapeMenu = new TransformShapeMenuViewModel();
             //список фигур для отображения на холсте и в списке фигур
             canvasFigureList = new ObservableCollection<MyShape>();
 
@@ -39,12 +44,14 @@ namespace MyPaint4000.ViewModels
 
             MyClear = ReactiveCommand.Create(() =>
             {
-                if (myFigure != null) MyFigure.SetDefault();
+                if (myFigure != null && myFigure is MyFigure) ((MyFigure)myFigure).SetDefault();
+                if (myFigure != null && myFigure is TransformShapeMenuViewModel) ((TransformShapeMenuViewModel)myFigure).SetDefault();
             });
             AddMyFigure = ReactiveCommand.Create(() =>
             {
+                if (myFigure != MyFigure) return;
                 //удаляем элемент с такимже именем
-                string nameAddItem = myFigure.Name;
+                string nameAddItem = ((MyFigure)myFigure).Name;
                 foreach (MyShape i in canvasFigureList)
                 {
                     if (i.Name == nameAddItem)
@@ -116,7 +123,17 @@ namespace MyPaint4000.ViewModels
                 }
             }
         }
-        public MyFigure? MyFigure
+        //трансформируемая фигура
+        public MyShape? NowTransformShape
+        {
+            get => nowTransformShape;
+            set
+            {
+                this.RaiseAndSetIfChanged(ref nowTransformShape, value);
+                MyFigure = transformShapeMenu;
+            }
+        }
+        public ViewModelBase? MyFigure
         {
             get => myFigure;
             set => this.RaiseAndSetIfChanged(ref myFigure, value);
