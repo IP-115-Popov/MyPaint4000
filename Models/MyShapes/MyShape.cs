@@ -19,6 +19,9 @@ namespace MyPaint4000.Models.MyShapes
         private double scaleTransformY;
         private double skewTransformAngleX;
         private double skewTransformAngleY;
+
+        private double positionX;
+        private double positionY;
         public MyShape() 
         {
             TranslateTransformX = 0;
@@ -34,6 +37,16 @@ namespace MyPaint4000.Models.MyShapes
         public string? Name { get; set; }
         public double StrokeThickness { get; set; }
         public string? Stroke { get; set; }
+        public double PositionX
+        {
+            get => positionX;
+            set => SetAndRaise(ref positionX, value);
+        }
+        public double PositionY
+        {
+            get => positionY;
+            set => SetAndRaise(ref positionY, value);
+        }
         //транформация
         public double TranslateTransformX
         {

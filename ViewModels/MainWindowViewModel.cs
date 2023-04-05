@@ -1,3 +1,4 @@
+using Avalonia.Controls.Shapes;
 using MyPaint4000.Models;
 using MyPaint4000.Models.MyShapes;
 using MyPaint4000.ViewModels.Page;
@@ -270,6 +271,7 @@ namespace MyPaint4000.ViewModels
                 StartPoint = straightLineViewModel.X1Y1,
                 EndPoint = straightLineViewModel.X2Y2,              
             });
-        }
+        } 
+
     }
 }

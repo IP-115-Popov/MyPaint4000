@@ -66,7 +66,9 @@
 			
 			<ItemsControl Items="{Binding CanvasFigureList}" Grid.Column="1"
 						  HorizontalAlignment="Stretch"
-						  VerticalAlignment="Stretch">
+						  VerticalAlignment="Stretch"
+						  PointerPressed="PointerPressedOnCanvas"
+						  DragDrop.AllowDrop="True">
 				
 				<ItemsControl.ItemsPanel>
 					<ItemsPanelTemplate>
